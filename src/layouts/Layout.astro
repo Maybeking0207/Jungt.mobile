@@ -12,6 +12,16 @@ interface Props {
 
 const { title, active } = Astro.props
 ---
+<script is:inline type="module">
+  try {
+      const urlhash = window.location.hash;
+      if (!urlhash.match("fromapp")) {
+          if (!navigator.userAgent.match(/(iPhone|iPod|Android|ios|iPad)/i)) {
+              window.location.href = "jungt.com";
+          }
+      }
+  } catch (err) {}
+</script>
 
 <html lang="zh">
   <head>
@@ -75,12 +85,12 @@ const { title, active } = Astro.props
     <!-- 想要导航栏固定就添加：fixed top-0 left-0 right-0 z-50，但还需要调整布局 -->
     <nav class=" bg-[#095dc0] dark:bg-gray-800 dark:border-gray-700">
       <!-- 顶部导航栏部分 -->
-      <div class="top max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <div class="left flex items-center space-x-3 rtl:space-x-reverse">
+      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <div class="flex items-center space-x-3 rtl:space-x-reverse">
           <Image src={logo} alt="logo" width="40" height="40" densities={[4]} />
           <span class="self-center text-2xl font-semibold whitespace-nowrap text-white dark:text-white mb-1.5">疆通科技</span>
         </div>
-        <button data-collapse-toggle="navbar-hamburger" type="button" class="right inline-flex items-center justify-center w-10 h-10 text-sm text-white rounded-lg hover:bg-gray-100 focus:outline-none focus:text-gray-500 focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:mr-4 md:w-15 md:h-15" aria-controls="navbar-hamburger" aria-expanded="false">
+        <button data-collapse-toggle="navbar-hamburger" type="button" class="inline-flex items-center justify-center w-10 h-10 text-sm text-white rounded-lg hover:bg-gray-100 focus:outline-none focus:text-gray-500 focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:mr-4 md:w-15 md:h-15" aria-controls="navbar-hamburger" aria-expanded="false">
           <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
           </svg>
@@ -141,6 +151,9 @@ const { title, active } = Astro.props
         box-sizing: border-box;
       }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script>
+      import 'flowbite';
+    </script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script> 通过 CDN 导入 -->
   </body>
 </html>
