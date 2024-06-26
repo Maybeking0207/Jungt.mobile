@@ -1,0 +1,62 @@
+---
+import PocketBase from 'pocketbase';
+import ModuleTitle from '../components/ModuleTitle.astro'
+const pb = new PocketBase('https://autoreport.site:8888');
+const url = 'https://autoreport.site:8888/api/files/dmngar3ukuklbip'
+
+const records = await pb.collection('advantage_mobile').getFullList({
+    sort: 'created',
+});
+
+const list = records.map((item: any) => {  
+  return {
+    icon : `${url}/${item.id}/${item.icon}`,
+    title: item.title,
+    content: item.content,
+    tab: item.tab
+  }
+})
+
+const getParams = (id:any) => {
+  return `/case?id=${id}`
+}
+---
+
+<div class="bg-white w-full mb-8 md:mb-16">
+  <ModuleTitle chinese="核心优势" english="Core advantages" />
+  
+  <div class="mx-[6%] justify-between items-center">
+    {
+      list.map((item: any) => (
+      <ul style="line-break: anywhere; word-wrap: break-word; "
+      class="text-[#333] font-[300] leading-[25px] md:text-2xl md:leading-[40px]"> 
+        <li class="flex items-start space-x-3">
+          <img
+          src={item.icon}
+          alt="logo"
+          width="25"
+          height="25"
+          class="mt-1 md:mt-[9px] md:w-[40px] md:h-[40px] md:mr-6"
+        />
+          <a href={getParams(item.tab)} class="mb-3 relative w-full"><span class="font-[700] text-[#5a7ef2]">{ item.title }：</span>{item.content}</a>
+        </li>
+      </ul>      
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .textbox {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+  }
+  .blue-bullets li {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+</style>

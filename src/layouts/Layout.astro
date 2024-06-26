@@ -1,7 +1,9 @@
 ---
+import 'tailwindcss/tailwind.css'
 import { ViewTransitions } from 'astro:transitions'
 import logo from '../../public/JT-logo.png'
 import { Image } from 'astro:assets'
+import Footer from '../components/Footer.vue'
 
 interface Props {
   title: string
@@ -65,59 +67,57 @@ const { title, active } = Astro.props
     <link rel="robots" href="/robots.txt" />
     <link rel="preload" href="https://autoreport.site:8888" />
     <meta name="generator" content={Astro.generator} />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <title>{title}</title>
     <ViewTransitions />
   </head>
   <body class="overflow-x-hidden">
-    <nav
-      class="h-[100px] bg-[#095dc0] w-full flex justify-between items-center text-white overflow-hidden"
-    >
-      <div class="flex justify-center items-center ml-[20%]">
-        <Image src={logo} alt="logo" width="80" height="80" densities={[4]} />
-        <div class="ml-2">
-          <div
-            style="font-family: PingFangSC-Semibold,PingFang SC,sans-serif; font-weight: 600"
-            class="text-[36px]"
-          >
-            疆通科技
-          </div>
-          <div class="!font-[PingFangSC-Semibold,PingFang SC] text-[14px]">
-            Jiangtong Technology
-          </div>
+    <!-- 想要导航栏固定就添加：fixed top-0 left-0 right-0 z-50，但还需要调整布局 -->
+    <nav class=" bg-[#095dc0] dark:bg-gray-800 dark:border-gray-700">
+      <!-- 顶部导航栏部分 -->
+      <div class="top max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <div class="left flex items-center space-x-3 rtl:space-x-reverse">
+          <Image src={logo} alt="logo" width="40" height="40" densities={[4]} />
+          <span class="self-center text-2xl font-semibold whitespace-nowrap text-white dark:text-white mb-1.5">疆通科技</span>
         </div>
-      </div>
-      <div
-        class="pt-[1.5%] pl-[1%] box-border list-none w-[50%] right h-full text-foreground flex items-center justify-around"
-      >
-        <div
-          class="bg-white h-full w-full flex items-center justify-around relative"
-        >
-          <div
-            class="bg-[#095dc0] w-[40px] h-[90px] absolute -top-3.5 -left-6 rotate-[20deg]"
-          >
-          </div>
-          <a href="/" class={active === '1' ? 'text-[#294dce]' : 'text-[#777]'}
-            >首页</a
-          >
-          <a
-            href="/about"
-            class={active === '2' ? 'text-[#294dce]' : 'text-[#777]'}
-            >关于我们</a
-          >
-          <a
-            href="/solution"
-            class={active === '3' ? 'text-[#294dce]' : 'text-[#777]'}
-            >解决方案</a
-          >
-          <a
-            href="/case"
-            class={active === '4' ? 'text-[#294dce]' : 'text-[#777]'}
-            >成功案例</a
-          >
+        <button data-collapse-toggle="navbar-hamburger" type="button" class="right inline-flex items-center justify-center w-10 h-10 text-sm text-white rounded-lg hover:bg-gray-100 focus:outline-none focus:text-gray-500 focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:mr-4 md:w-15 md:h-15" aria-controls="navbar-hamburger" aria-expanded="false">
+          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+          </svg>
+        </button>
+
+        <!-- 菜单 -->
+        <div class="hidden w-full" id="navbar-hamburger">
+          <ul class="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700 md:mt-6 md:px-4">
+            <li>
+              <div class="block pt-4 pb-2 px-3 text-[15px] text-gray-900 rounded  hover:bg-blue-700 md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500 md:text-2xl md:mt-4" aria-current="page">
+                <a href="/" class={active === '1' ? 'text-[#294dce]' : 'text-gray-900'}>首页</a>
+              </div>
+            </li>
+            <li>
+              <div class="block py-2 px-3 text-[15px] rounded hover:bg-blue-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent md:text-2xl md:mt-4">
+                <a href="/about/" class={active === '2' ? 'text-[#294dce]' : 'text-gray-900'}>关于我们</a>
+              </div>
+            </li>
+            <li>
+              <div class="block py-2 px-3 text-[15px] rounded hover:bg-blue-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent md:text-2xl md:mt-4">
+                <a href="/solution/" class={active === '3' ? 'text-[#294dce]' : 'text-gray-900'}>解决方案</a>
+              </div>
+            </li>
+            <li>
+              <div class="block pt-2 pb-4 px-3 text-[15px] rounded hover:bg-blue-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent md:text-2xl md:my-4">
+                <a href="/case/" class={active === '4' ? 'text-[#294dce]' : 'text-gray-900'}>成功案例</a>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
 
+    <section class="bg-white">
+      <slot />
+    </section>
+    <Footer client:load />
     <style is:global>
       html,
       body {
@@ -141,5 +141,6 @@ const { title, active } = Astro.props
         box-sizing: border-box;
       }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
   </body>
 </html>

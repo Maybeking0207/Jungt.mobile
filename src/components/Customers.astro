@@ -1,0 +1,35 @@
+---
+import PocketBase from 'pocketbase';
+import ModuleTitle3 from '../components/ModuleTitle3.vue'
+
+const url = 'https://autoreport.site:8888/api/files/eo6yu3ejwzi4296'
+const pb = new PocketBase('https://autoreport.site:8888');
+
+const records = await pb.collection('company').getFullList({
+  sort:"-created",
+})
+const CompanyList = records.map((item: any) => {
+  return {
+    title: item.title,
+    content: item.content,
+    img: `${url}/${item.id}/${item.img}`,
+  }
+})
+---
+
+<div class="w-full h-[500px] px-[6%] pt-1 md:h-[820px]">
+  <ModuleTitle3 chinese="我们的客户" introduce="Our customers" />
+  <div class=" relative grid grid-cols-3 gap-4  md:ml-6 ">
+    {
+      CompanyList.map((item: any) => (
+        <div class="mb-4">
+          <img
+            src={item.img}
+            alt="图片"
+            class="w-[90%] md:w-[80%] vertical-align-middle overflow-clip"
+          />
+        </div>
+      ))
+    }
+  </div>
+</div>

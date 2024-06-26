@@ -1,27 +1,17 @@
 ---
-import Header from '../components/Header.astro';
-import '../styles/global.css';
-
-const pageTitle = "解决方案";
+import Layout from "../layouts/Layout.astro";
+import { Image } from 'astro:assets'
+import logo from '../../public/AboutLogo.627a361.png'
+import Solve from "../components/solve.vue";
 ---
 
-<html lang="zh-cn">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type ="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content = {Astro.generator} >
-    <title>{ pageTitle }</title>
-  </head>
-  <body>
-    <Header />
-    
-    <h1>{ pageTitle }</h1>
-    <h2>这里是解决方案的内容页</h2>
+<Layout title="上海疆通科技有限公司" active="3">
+  <main>
+    <div class="w-full">
+      <Image src={logo} alt="背景图片" class="w-full object-cover h-[145.57px]"/>
+      <Solve client:visible />
+    </div>
+  </main>
+</Layout>
 
-    <script>
-      import "../scripts/menu.js";
-    </script>
-    
-  </body>
-</html>
+<style></style>

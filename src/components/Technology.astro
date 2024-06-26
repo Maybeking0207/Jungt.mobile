@@ -1,0 +1,54 @@
+---
+import PocketBase from 'pocketbase';
+import ModuleTitle from '../components/ModuleTitle.astro'
+
+const url = 'https://autoreport.site:8888/api/files/gx4kvczkq2l1ijy'
+// const s = await fetch(
+//   'https://autoreport.site:8888/api/collections/solution/records',
+// )
+const pb = new PocketBase('https://autoreport.site:8888');
+const records = await pb.collection('solution').getFullList({
+    sort: 'created',
+  });
+
+// const { items } = await s.json()
+const list = records.map((item: any) => {
+  return {
+    icon: `${url}/${item.id}/${item.icon}`,
+    title: item.title,
+    line: item.line,
+    content: item.content,
+  }
+})
+
+const SolutionList = list
+---
+
+<div class="bg-[#F0F2F5] w-full flex items-center flex-col">
+  <ModuleTitle chinese="核心技术" english="Core Technology" />
+    
+  <div class="flex flex-col w-full ">
+    {SolutionList.map((item: any, index: number) => (
+      <div class="bg-[#F0F2F5] h-[460px] flex-1 relative">
+        <div class={`text-[#333] text-xl font-[600] text-center pr-1 md:text-3xl md:mb-6 ${index === 0? '' : 'md:mt-6'}`}>{item.title}</div>
+        {/* <div class="text-sm">{item.conclusion}</div> */}
+        <p
+          style="line-break: anywhere; word-wrap: break-word;"
+          class="text-[#333] font-[300] px-[6%] mt-4 leading-[25px] md:text-2xl md:leading-10"
+        >{item.line}</p>
+        <div class={`flex flex-col bg-cover h-[12rem] md:h-[22rem] mt-5 ${index === SolutionList.length - 1 ? '' : 'mb-6'}`} style={`background-image: url(${item.icon})`}>
+      </div>  
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .textbox {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>

@@ -1,29 +1,20 @@
 ---
-import Header from '../components/Header.astro';
-import '../styles/global.css';
-
-const pageTitle = "关于我们";
+import Layout from '../layouts/Layout.astro'
+import ModuleTitle2 from '../components/ModuleTitle2.astro'
+import { Image } from 'astro:assets'
+import logo from '../../public/AboutLogo.627a361.png'
+import Customers from '../components/Customers.astro'
+import Culture from '../components/Culture.vue'
+import Certificate from '../components/Certificate.vue'
 ---
-
-<html lang="zh-cn">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type ="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content = {Astro.generator} >
-    <title>{ pageTitle }</title>
-
-  </head>
-  <body>
-    <Header />
-
-    <h1>{ pageTitle }</h1>
-    <h2>这里是关于我们的内容页</h2>
-
-
-    <script>
-      import "../scripts/menu.js";
-    </script>
-    
-  </body>
-</html>
+<Layout title="上海疆通科技有限公司" active="2">
+  <main>
+    <div class="w-full">
+      <Image src={logo} alt="背景图片" class="w-full object-cover h-[145.57px]"/>
+      <ModuleTitle2 chinese="关于我们" english="探索智慧生活，提升人类幸福" />
+      <Culture client:visible />
+      <Certificate client:visible />
+      <Customers />
+    </div>
+  </main>
+</Layout>
