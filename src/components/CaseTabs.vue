@@ -64,10 +64,13 @@ const changeTab = (index) => {
                 <div
                   class="border-[1px] border-[#e8e8e8] pt-[10px] px-2.5 pb-2.5 md:my-1 md:p-4"
                 >
-                  <span class="overflow-hidden textbox text-ellipsis leading-[25px] text-[14px] md:text-[20px] md:leading-10 ">
-                    <span class="text-[#447bf3] text-[14px] font-[700] md:text-[20px]">{{
-                      cardCardItem.background
-                    }}</span>
+                  <span 
+                    :class="{'textbox': !cardCardItem.expanded, 'expanded': cardCardItem.expanded}"
+                    @click="toggleExpand(cardItem, cardCardIndex)"
+                  >
+                    <span class="text-[#447bf3] text-[14px] font-[700] md:text-[20px]">
+                      {{ cardCardItem.background }}
+                    </span>
                     {{ cardCardItem.data }}
                   </span>
                 </div>
@@ -79,6 +82,43 @@ const changeTab = (index) => {
     </a-tabs>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      tabIndex: 0,
+      tabsList: [
+        {
+          tab: 'Tab 1',
+          cardList: [
+            {
+              img: 'path/to/image.jpg',
+              title: 'Card Title 1',
+              value: 'Card Value 1',
+              card: [
+                {
+                  background: 'Background 1',
+                  data: 'This is some text data that will be initially truncated.',
+                  expanded: false // Add expanded state
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+  },
+  methods: {
+    changeTab(newTabIndex) {
+      this.tabIndex = newTabIndex;
+    },
+    toggleExpand(cardItem, index) {
+      cardItem.card[index].expanded = !cardItem.card[index].expanded;
+    }
+  }
+};
+</script>
 
 <style scoped>
 :deep(.arco-tabs-nav) {
@@ -125,5 +165,9 @@ const changeTab = (index) => {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.expanded {
+  display: block;
 }
 </style>
