@@ -49,7 +49,7 @@ onMounted(async () => {
   <div class="w-full">
     <div class="mt-10 mb-8 px-[6%] md:mt-20 md:mb-14">
       <div class="text-2xl text-[#333] font-[700] text-center md:text-4xl ">解决方案</div>
-      <div class="text-base text-[#777] font-[200] leading-[25px] mt-3 md:mt-4 md:text-2xl md:leading-10">{{ title }}</div>
+      <div class="text-base text-[#777] font-[300] leading-[25px] mt-3 md:mt-4 md:text-2xl md:leading-10">{{ title }}</div>
     </div>
     <a-tabs @change="changeTitle" :active-key="tabIndex" :default-active-key="tabIndex">
       <a-tab-pane

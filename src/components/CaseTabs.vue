@@ -52,7 +52,7 @@ const changeTab = (index) => {
               <div class="text-[16px] font-[600] text-[#333] mb-2 md:text-[22px] md:mt-2">
                 {{ cardItem.title }}
               </div>
-              <div class="font-normal text-[15px] text-[#747474]">
+              <div class="font-normal text-[15px] text-[#747474] md:text-[21px]">
                 {{ cardItem.value }}
               </div>
             </div>
@@ -64,7 +64,7 @@ const changeTab = (index) => {
                 <div
                   class="border-[1px] border-[#e8e8e8] pt-[10px] px-2.5 pb-2.5 md:my-1 md:p-4"
                 >
-                  <span class="overflow-hidden text-ellipsis leading-[25px] text-[14px] md:text-[20px] md:leading-10 ">
+                  <span class="overflow-hidden textbox text-ellipsis leading-[25px] text-[14px] md:text-[20px] md:leading-10 ">
                     <span class="text-[#447bf3] text-[14px] font-[700] md:text-[20px]">{{
                       cardCardItem.background
                     }}</span>
@@ -121,7 +121,7 @@ const changeTab = (index) => {
 
 .textbox {
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -2,12 +2,12 @@
 import PocketBase from 'pocketbase';
 import ModuleTitle from '../components/ModuleTitle.astro'
 
-const url = 'https://autoreport.site:8888/api/files/gx4kvczkq2l1ijy'
+const url = 'https://autoreport.site:8888/api/files/3hcksdk4sgdky4j'
 // const s = await fetch(
 //   'https://autoreport.site:8888/api/collections/solution/records',
 // )
 const pb = new PocketBase('https://autoreport.site:8888');
-const records = await pb.collection('solution').getFullList({
+const records = await pb.collection('solution_mobile').getFullList({
     sort: 'created',
   });
 
@@ -16,7 +16,8 @@ const list = records.map((item: any) => {
   return {
     icon: `${url}/${item.id}/${item.icon}`,
     title: item.title,
-    line: item.line,
+    line1: item.line1,
+    line2: item.line2,
     content: item.content,
   }
 })
@@ -33,9 +34,11 @@ const SolutionList = list
         <div class={`text-[#333] text-xl font-[600] text-center pr-1 md:text-3xl md:mb-6 ${index === 0? '' : 'md:mt-6'}`}>{item.title}</div>
         {/* <div class="text-sm">{item.conclusion}</div> */}
         <p
-          style="line-break: anywhere; word-wrap: break-word;"
           class="text-[#333] font-[300] px-[6%] mt-4 leading-[25px] md:text-2xl md:leading-10"
-        >{item.line}</p>
+        >{item.line1}</p>
+        <p
+          class="text-[#333] font-[300] px-[6%] leading-[25px] md:text-2xl md:leading-10"
+        >{item.line2}</p>
         <div class={`flex flex-col bg-cover h-[12rem] md:h-[22rem] mt-5 ${index === SolutionList.length - 1 ? '' : 'mb-6'}`} style={`background-image: url(${item.icon})`}>
       </div>  
       </div>

@@ -43,7 +43,7 @@ onMounted(async () => {
     </div>
     <!-- 新闻内容 end -->
      <div class="know-more my-5">
-      <a href="#" class="text-[#E73522] text-[14px] font-[700] md:text-2xl">了解更多新闻动态</a>
+      <a href="https://mp.weixin.qq.com/mp/homepage?__biz=MzIwMDg4MDQyMA==&hid=6&sn=3fcd9a84b24e2c9d8665828cc67e0f42&scene=18#wechat_redirect" class="text-[#E73522] text-[14px] font-[700] md:text-2xl">了解更多新闻动态</a>
       <span class="arrow-right"></span>
     </div>
   </div>

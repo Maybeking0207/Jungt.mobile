@@ -179,31 +179,31 @@ const getParams = (id) =>{
         <div class="text-2xl text-[#333] font-[700] text-center md:text-4xl"> {{ dataList.prescriptionList[3].title }}</div>
         <div class="text-base text-[#ccc] font-[700] text-center md:text-2xl md:mt-2">{{ dataList.prescriptionList[3].titleEn }}</div>
       </div>
-      <div class="flex flex-wrap justify-start gap-6 relative">
+      <div class="case flex flex-wrap justify-between md:justify-start md:gap-6 relative">
         <div
           v-for="(list, listIndex) in dataList.prescriptionList[3]
             .prescriptionDescList"
           :key="listIndex"
           class="mb-10 md:mb-[60px]"
         >
-        <a :href="getParams(list.tab)">
-          <div
-            class="bg-white border-[1px] border-[#ededed] w-[180px] md:w-[210px]"
-          >
-            <img
-              :src="list.icon"
-              alt="图片"
-              class="w-[180px] h-[180px] md:w-[210px] md:h-[200px]"
+          <a :href="getParams(list.tab)">
+            <div
+              class="case-border bg-white border-[1px] border-[#ededed] w-[170px] md:w-[210px]"
             >
-            <div class="flex h-full bg-gray-100 px-4 py-4">
-              <div
-                class="text-[#333] text-[14px] md:text-[18px]"
+              <img
+                :src="list.icon"
+                alt="图片"
+                class="case-img w-[170px] h-[170px] md:w-[210px] md:h-[200px]"
               >
-                {{ list.descTitle }}
+              <div class="flex h-full bg-gray-100 ">
+                <div
+                  class="case-desc text-[#333] text-[14px] md:text-[18px] p-[14px]"
+                >
+                  {{ list.descTitle }}
+                </div>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
         </div>
       </div>
     </div>
@@ -211,4 +211,20 @@ const getParams = (id) =>{
 </template>
 
 <style scoped>
+@media(max-width: 390px) {
+  .case-border, .case-img {
+    @apply w-[160px] h-auto;
+  }
+  .case-desc{
+    @apply text-[13px];
+  }
+}
+@media(max-width: 368px) {
+  .case-border, .case-img {
+    @apply w-[150px] h-auto;
+  }
+  .case-desc{
+    @apply text-[13px] p-2;
+  }
+}
 </style>

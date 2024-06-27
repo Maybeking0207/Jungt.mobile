@@ -82,47 +82,59 @@ const { title, active } = Astro.props
     <ViewTransitions />
   </head>
   <body class="overflow-x-hidden">
-    <!-- 想要导航栏固定就添加：fixed top-0 left-0 right-0 z-50，但还需要调整布局 -->
-    <nav class=" bg-[#095dc0] dark:bg-gray-800 dark:border-gray-700">
-      <!-- 顶部导航栏部分 -->
-      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <div class="flex items-center space-x-3 rtl:space-x-reverse">
-          <Image src={logo} alt="logo" width="40" height="40" densities={[4]} />
-          <span class="self-center text-2xl font-semibold whitespace-nowrap text-white dark:text-white mb-1.5">疆通科技</span>
-        </div>
-        <button data-collapse-toggle="navbar-hamburger" type="button" class="inline-flex items-center justify-center w-10 h-10 text-sm text-white rounded-lg hover:bg-gray-100 focus:outline-none focus:text-gray-500 focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:mr-4 md:w-15 md:h-15" aria-controls="navbar-hamburger" aria-expanded="false">
-          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-          </svg>
-        </button>
+    <!-- navbar start -->
+    <nav class="fixed right-0 left-0 z-[999] bg-[#095dc0] dark:bg-gray-800 dark:border-gray-700">
+      <!-- 顶部导航栏部分 start -->
+      <div x-data="{ expanded: false }">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+          <div class="flex items-center space-x-3 rtl:space-x-reverse">
+            <Image src={logo} alt="logo" width="40" height="40" densities={[4]} />
+            <span class="self-center text-2xl font-semibold whitespace-nowrap text-white dark:text-white mb-1.5">疆通科技</span>
+          </div>
+          <button @click="expanded  = !expanded" type="button" class="inline-flex items-center justify-center w-10 h-10 text-sm text-white rounded-lg hover:bg-gray-100 focus:outline-none focus:text-gray-500 focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:mr-4 md:w-15 md:h-15" aria-expanded="false">
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+            </svg>
+          </button>
 
-        <!-- 菜单 -->
-        <div class="hidden w-full" id="navbar-hamburger">
-          <ul class="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700 md:mt-6 md:px-4">
-            <li>
-              <div class="block pt-4 pb-2 px-3 text-[15px] text-gray-900 rounded  hover:bg-blue-700 md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500 md:text-2xl md:mt-4" aria-current="page">
-                <a href="/" class={active === '1' ? 'text-[#294dce]' : 'text-gray-900'}>首页</a>
-              </div>
-            </li>
-            <li>
-              <div class="block py-2 px-3 text-[15px] rounded hover:bg-blue-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent md:text-2xl md:mt-4">
-                <a href="/about/" class={active === '2' ? 'text-[#294dce]' : 'text-gray-900'}>关于我们</a>
-              </div>
-            </li>
-            <li>
-              <div class="block py-2 px-3 text-[15px] rounded hover:bg-blue-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent md:text-2xl md:mt-4">
-                <a href="/solution/" class={active === '3' ? 'text-[#294dce]' : 'text-gray-900'}>解决方案</a>
-              </div>
-            </li>
-            <li>
-              <div class="block pt-2 pb-4 px-3 text-[15px] rounded hover:bg-blue-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent md:text-2xl md:my-4">
-                <a href="/case/" class={active === '4' ? 'text-[#294dce]' : 'text-gray-900'}>成功案例</a>
-              </div>
-            </li>
-          </ul>
+          <!-- 菜单 start -->
+          <div x-show="expanded" class="w-full" id="navbar-hamburger">
+            <ul class="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700 md:mt-6 md:px-4">
+              <li>
+                <a href="/" class={active === '1' ? 'text-[#294dce] hover:text-white' : 'text-gray-900 hover:text-white'}>
+                  <div class="block pt-4 pb-2 px-3 text-[15px] text-gray-900 rounded  hover:bg-blue-700 hover:text-white md:hover:text-white md:bg-transparent md:p-0 dark:text-white md:dark:text-blue-500 md:text-2xl md:mt-4" aria-current="page">
+                  首页
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/about/" class={active === '2' ? 'text-[#294dce] hover:text-white' : 'text-gray-900 hover:text-white'}>
+                  <div class="block py-2 px-3 text-[15px] rounded hover:bg-blue-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent md:text-2xl md:mt-4">
+                    关于我们
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/solution/" class={active === '3' ? 'text-[#294dce] hover:text-white' : 'text-gray-900 hover:text-white'}><a href="/solution/" class={active === '3' ? 'text-[#294dce] hover:text-white' : 'text-gray-900 hover:text-white'}>
+                  <div class="block py-2 px-3 text-[15px] rounded hover:bg-blue-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent md:text-2xl md:mt-4">
+                    解决方案
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="/case/" class={active === '4' ? 'text-[#294dce] hover:text-white' : 'text-gray-900 hover:text-white'}>
+                  <div class="block pt-2 pb-4 px-3 text-[15px] rounded hover:bg-blue-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent md:text-2xl md:my-4">
+                    成功案例
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- 菜单 end -->
         </div>
       </div>
     </nav>
+    <!-- navbar end -->
 
     <section class="bg-white">
       <slot />
@@ -146,14 +158,14 @@ const { title, active } = Astro.props
         background-color: #fff;
         font-feature-settings: 'tnum';
       }
-
       * {
         box-sizing: border-box;
       }
+      :root {
+        --navbar-height: 64px; /* 设置导航栏高度 */
+      }
     </style>
-    <script>
-      import 'flowbite';
-    </script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script> 通过 CDN 导入 -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
   </body>
 </html>
