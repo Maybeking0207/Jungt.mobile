@@ -64,7 +64,7 @@ onMounted(async () => {
             class="mb-10 w-[370px] pb-[20px] bg-[#f6f7f8] hover:shadow md:w-[800px]"
           >
             <a :href="getUrl(itemList.id)" target="_blank">
-              <div class="w-full h-[140px] md:h-[220px]">
+              <div class="w-full h-[170px] md:h-[220px]">
                 <img
                   :src="itemList.img"
                   alt="图片"

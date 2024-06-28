@@ -4,6 +4,7 @@ import PocketBase from 'pocketbase'
 
 const tabsList = ref([])
 const tabIndex = ref(0)
+
 onMounted(async () => {
   const pb = new PocketBase('https://autoreport.site:8888')
   const data = await pb
@@ -18,18 +19,26 @@ onMounted(async () => {
           title: card.title,
           value: card.value,
           img: `${url}/${card.id}/${card.img}`,
-          card: card.expand.card,
+          card: card.expand.card.map(cardItem => ({
+            ...cardItem,
+            expanded: false // Add expanded state
+          }))
         }
-      }),
+      })
     }
   })
-  if(window.location.href.includes('?') === true){
-    tabIndex.value = +window.location.href.split('?')[1].split("=")[1]
+
+  if (window.location.href.includes('?') === true) {
+    tabIndex.value = +window.location.href.split('?')[1].split('=')[1]
   }
-  console.log(tabIndex.value)
 })
+
 const changeTab = (index) => {
   tabIndex.value = index
+}
+
+const toggleExpand = (cardItem, index) => {
+  cardItem.card[index].expanded = !cardItem.card[index].expanded
 }
 </script>
 

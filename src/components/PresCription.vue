@@ -193,11 +193,11 @@ const getParams = (id) =>{
               <img
                 :src="list.icon"
                 alt="图片"
-                class="case-img w-[170px] h-[170px] md:w-[210px] md:h-[200px]"
+                class="case-img w-[170px] h-[155px] md:w-[210px] md:h-[200px]"
               >
               <div class="flex h-full bg-gray-100 ">
                 <div
-                  class="case-desc text-[#333] text-[14px] md:text-[18px] p-[14px]"
+                  class="case-desc text-[#333] text-[14px] md:text-[18px] p-[12px]"
                 >
                   {{ list.descTitle }}
                 </div>
